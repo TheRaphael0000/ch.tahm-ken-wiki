@@ -32,7 +32,7 @@ $wgMetaNamespace = "Tahm-ken.ch_wiki";
 $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://wiki.tahm-ken.ch";
+$wgServer = getenv('WIKI_URL');
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -59,9 +59,10 @@ $wgEmailAuthentication = true;
 ## Database settings
 $wgDBtype = "mysql";
 $wgDBserver = "database";
-$wgDBname = getenv('MYSQL_DATABASE');
-$wgDBuser = getenv('MYSQL_USER');
-$wgDBpassword = getenv('MYSQL_PASSWORD');
+$wgDBname = getenv('MARIADB_DATABASE');
+$wgDBuser = getenv('MARIADB_USER');
+$wgDBpassword = getenv('MARIADB_PASSWORD');
+$wgDBadminpassword = getenv('MARIADB_ROOT_PASSWORD');
 
 # MySQL specific settings
 $wgDBprefix = "";
@@ -103,14 +104,14 @@ $wgLocaltimezone = "UTC";
 ## be publicly accessible from the web.
 #$wgCacheDirectory = "$IP/cache";
 
-$wgSecretKey = "dded10df150050c21cde88477a440ec6f4ea287148552a59020e1f089ba72afa";
+$wgSecretKey = getenv('WIKI_SECRET_KEY');
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = "e647d15c29bb925f";
+$wgUpgradeKey = getenv('WIKI_UPGRADE_KEY');
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -135,3 +136,5 @@ wfLoadSkin( 'MinervaNeue' );
 # End of automatically generated settings.
 # Add more configuration options below.
 
+
+$wgShowExceptionDetails = true;
