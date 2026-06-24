@@ -40,8 +40,8 @@ $wgResourceBasePath = $wgScriptPath;
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
 $wgLogos = [
-	'1x' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
-	'icon' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
+	// '1x' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
+	// 'icon' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
 ];
 
 ## UPO means: this is also a user preference option
@@ -126,15 +126,21 @@ $wgDiff3 = "/usr/bin/diff3";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, e.g. 'vector' or 'monobook':
-$wgDefaultSkin = "vector";
+$wgDefaultSkin = "vector-2022";
 
-# Enabled skins.
-# The following skins were automatically enabled:
-wfLoadSkin( 'Vector' );
+wfLoadSkin( 'VectorTahmkench' );
 
 
 # End of automatically generated settings.
 # Add more configuration options below.
 
+if (getenv("WIKI_ENV") != "PROD") {
+	# configs to dynamically load each page for skin dev
+	$wgShowExceptionDetails = true;
+	$wgResourceLoaderDebug = true;
+	$wgCachePages = false;
 
-$wgShowExceptionDetails = true;
+	$wgMainCacheType = CACHE_NONE;
+	$wgMessageCacheType = CACHE_NONE;
+	$wgParserCacheType = CACHE_NONE;
+}

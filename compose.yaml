@@ -11,6 +11,7 @@ services:
         volumes:
             - ./data/images:/var/www/html/images
             - ./LocalSettings.php:/var/www/html/LocalSettings.php
+            - ../VectorTahmkench:/var/www/html/skins/VectorTahmkench
         depends_on:
             database:
                 condition: service_healthy
