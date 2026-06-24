@@ -1,0 +1,25 @@
+services:
+    mediawiki:
+        image: mediawiki:latest
+        env_file:
+            - .env
+        restart: always
+        ports:
+            - 8080:80
+        links:
+            - database
+        volumes:
+            - images:/var/www/html/images
+            - ./LocalSettings.php:/var/www/html/LocalSettings.php
+    database:
+        image: mariadb:latest
+        restart: always
+        env_file:
+            - .env
+        environment:
+            MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+        volumes:
+            - ./data/db:/var/lib/mysql
+
+volumes:
+    images:
