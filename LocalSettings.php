@@ -46,7 +46,7 @@ $wgLogos = [
 
 ## UPO means: this is also a user preference option
 
-$wgEnableEmail = true;
+$wgEnableEmail = false;
 $wgEnableUserEmail = false; # UPO
 
 $wgEmergencyContact = "";
@@ -54,7 +54,7 @@ $wgPasswordSender = "";
 
 $wgEnotifUserTalk = false; # UPO
 $wgEnotifWatchlist = false; # UPO
-$wgEmailAuthentication = true;
+$wgEmailAuthentication = false;
 
 ## Database settings
 $wgDBtype = "mysql";
@@ -133,6 +133,12 @@ $wgDefaultMobileSkin = 'citizen';
 wfLoadExtension( 'VisualEditor' );
 $wgVisualEditorEnableWikitext = true; 
 $wgDefaultUserOptions['visualeditor-enable'] = 1;
+
+# User rights
+$wgGroupPermissions['*']['createpage'] = false;
+$wgGroupPermissions['*']['edit'] = false;
+$wgGroupPermissions['user']['createpage'] = false;
+$wgGroupPermissions['user']['edit'] = true;
 
 # Dev Params
 if (getenv("WIKI_ENV") != "PROD") {
