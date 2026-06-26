@@ -1,13 +1,12 @@
 services:
-    mediawiki:
+    tahmkenchwiki:
         image: mediawiki:1.45.3
         env_file:
             - .env
         restart: unless-stopped
-        ports:
-            - 8080:80
         networks:
             - wiki
+            - nginx
         volumes:
             - ./data/images:/var/www/html/images
             - ./branding:/var/www/html/resources/branding:ro
@@ -43,3 +42,6 @@ services:
 
 networks:
     wiki:
+    nginx:
+        external: true
+        name: nginx
