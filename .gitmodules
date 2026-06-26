@@ -1,0 +1,6 @@
+[submodule "mediawiki-skins-Citizen"]
+	path = skins/mediawiki-skins-Citizen
+	url = git@github.com:StarCitizenTools/mediawiki-skins-Citizen.git
+[submodule "extensions/HeadScript"]
+	path = extensions/HeadScript
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/HeadScript

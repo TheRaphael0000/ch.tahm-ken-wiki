@@ -41,7 +41,7 @@ $wgResourceBasePath = $wgScriptPath;
 ## or else you'll overwrite your logo when you upgrade!
 $wgLogos = [
 	// '1x' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
-	// 'icon' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
+	'icon' => "$wgResourceBasePath/resources/branding/favicon.png",
 ];
 
 ## UPO means: this is also a user preference option
@@ -124,16 +124,17 @@ $wgRightsIcon = "";
 # Path to the GNU diff3 utility. Used for conflict resolution.
 $wgDiff3 = "/usr/bin/diff3";
 
-## Default skin: you can change the default skin. Use the internal symbolic
-## names, e.g. 'vector' or 'monobook':
-$wgDefaultSkin = "vector-2022";
+# Skin
+wfLoadSkin( 'Citizen' );
+$wgDefaultSkin = "citizen";
+$wgDefaultMobileSkin = 'citizen';
 
-wfLoadSkin( 'VectorTahmkench' );
+# Visual Editor
+wfLoadExtension( 'VisualEditor' );
+$wgVisualEditorEnableWikitext = true; 
+$wgDefaultUserOptions['visualeditor-enable'] = 1;
 
-
-# End of automatically generated settings.
-# Add more configuration options below.
-
+# Dev Params
 if (getenv("WIKI_ENV") != "PROD") {
 	# configs to dynamically load each page for skin dev
 	$wgShowExceptionDetails = true;
@@ -143,4 +144,10 @@ if (getenv("WIKI_ENV") != "PROD") {
 	$wgMainCacheType = CACHE_NONE;
 	$wgMessageCacheType = CACHE_NONE;
 	$wgParserCacheType = CACHE_NONE;
+} else {
+	# Umami Script
+	wfLoadExtension( 'HeadScript' );
+	$wgHeadScriptCode = <<<'START_END_MARKER'
+	<script defer src="https://tasty.theraphael0000.ch/script.js" data-website-id="e17bbf73-ce5d-4e0e-9228-df087dd33ec9"></script>
+	START_END_MARKER;
 }

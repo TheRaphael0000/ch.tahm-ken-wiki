@@ -1,6 +1,6 @@
 services:
     mediawiki:
-        image: mediawiki:latest
+        image: mediawiki:1.45.3
         env_file:
             - .env
         restart: unless-stopped
@@ -10,8 +10,11 @@ services:
             - wiki
         volumes:
             - ./data/images:/var/www/html/images
-            - ./LocalSettings.php:/var/www/html/LocalSettings.php
-            - ../VectorTahmkench:/var/www/html/skins/VectorTahmkench
+            - ./branding:/var/www/html/resources/branding:ro
+            - ./datadragon:/datadragon:ro
+            - ./LocalSettings.php:/var/www/html/LocalSettings.php:ro
+            - ./skins/mediawiki-skins-Citizen:/var/www/html/skins/Citizen:ro
+            - ./extensions/HeadScript:/var/www/html/extensions/HeadScript:ro
         depends_on:
             database:
                 condition: service_healthy
@@ -29,6 +32,14 @@ services:
             interval: 5s
             timeout: 5s
             retries: 5
+
+    # fix volume owner
+    volume-fixer:
+        image: mediawiki:1.45.3
+        user: root
+        volumes:
+        - ./data/images:/var/www/html/images
+        command: chown -R www-data:www-data /var/www/html/images
 
 networks:
     wiki:
