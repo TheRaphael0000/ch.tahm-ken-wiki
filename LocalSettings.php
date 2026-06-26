@@ -137,7 +137,8 @@ $wgDefaultUserOptions['visualeditor-enable'] = 1;
 # User rights
 $wgGroupPermissions['*']['createpage'] = false;
 $wgGroupPermissions['*']['edit'] = false;
-$wgGroupPermissions['user']['createpage'] = false;
+$wgGroupPermissions['*']['createtalk'] = false;
+$wgGroupPermissions['user']['createpage'] = true;
 $wgGroupPermissions['user']['edit'] = true;
 
 # Dev Params

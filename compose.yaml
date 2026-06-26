@@ -14,6 +14,7 @@ services:
             - ./LocalSettings.php:/var/www/html/LocalSettings.php:ro
             - ./skins/mediawiki-skins-Citizen:/var/www/html/skins/Citizen:ro
             - ./extensions/HeadScript:/var/www/html/extensions/HeadScript:ro
+            - ./robot.txt:/var/www/html/robot.txt:ro
         depends_on:
             database:
                 condition: service_healthy
