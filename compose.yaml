@@ -1,6 +1,7 @@
 services:
     tahmkenchwiki:
         image: mediawiki:1.45.3
+        container_name: tahmkenchwiki
         env_file:
             - .env
         restart: unless-stopped
@@ -15,11 +16,9 @@ services:
             - ./skins/mediawiki-skins-Citizen:/var/www/html/skins/Citizen:ro
             - ./extensions/HeadScript:/var/www/html/extensions/HeadScript:ro
             - ./robot.txt:/var/www/html/robot.txt:ro
-        depends_on:
-            database:
-                condition: service_healthy
     database:
         image: mariadb:latest
+        container_name: tahmkenchwiki-db
         restart: always
         env_file:
             - .env
@@ -27,15 +26,11 @@ services:
             - wiki
         volumes:
             - ./data/db:/var/lib/mysql
-        healthcheck:
-            test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "--password=${MARIADB_ROOT_PASSWORD}"]
-            interval: 5s
-            timeout: 5s
-            retries: 5
 
     # fix volume owner
     volume-fixer:
         image: mediawiki:1.45.3
+        container_name: tahmkenchwiki-volumefixer
         user: root
         volumes:
         - ./data/images:/var/www/html/images

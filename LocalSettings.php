@@ -141,6 +141,9 @@ $wgGroupPermissions['*']['createtalk'] = false;
 $wgGroupPermissions['user']['createpage'] = true;
 $wgGroupPermissions['user']['edit'] = true;
 
+# Short URLs (https://www.mediawiki.org/wiki/Manual:Short_URL/Nginx)
+$wgArticlePath = "/wiki/$1";
+
 # Dev Params
 if (getenv("WIKI_ENV") != "PROD") {
 	# configs to dynamically load each page for skin dev
